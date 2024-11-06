@@ -9,6 +9,27 @@
 - Clean design, easy to read and understand, easy to update
 - Try to compile Java code on your own, use a simple text editor like VSCode
 
+## Todo list
+
+**Main Program**
+
+- [ ] Parse the scenario file
+    - [ ] First line should be a **positive integer number**.
+    - [ ] The following lines should follows this syntax:
+        
+        ```text
+        TYPE NAME LONGITUDE LATITUDE HEIGHT
+        ```
+
+    - [ ] There are 3 `TYPE`, aka Aircrafts. JetPlane, Helicopter, Baloon.
+    - [ ] Coordinates (`LONGITUDE`, `LATITUDE`, `HEIGHT`) are positive numbers.
+    - [ ] Height is in the **0-100** range
+    - [ ] **(OWN)** Allows any whitespaces. Leading, in between and trailing.
+
+- [ ] Tester
+    - [ ] Have a helper class to do testing
+    - [ ] Setup recipe in Makefile to run tests
+
 ## General Instructions
 
 - Use language features up to the latest Java LTS version
