@@ -30,6 +30,36 @@
     - [ ] Have a helper class to do testing
     - [ ] Setup recipe in Makefile to run tests
 
+## Setup
+
+```text
+src/
+    main/
+        java/
+            com/fourtytwo/avajlauncher/
+                util/
+                [features]/
+    test/
+        java/
+            com/fourtytwo/avajlauncher/
+                [features]/
+                    [FeatureTest.java]
+                resources/
+```
+
+- All the main class will be residing in `main/` folder.
+- All the test cases class will be resideing in `test/` folder.
+- `src/main/java/.../util/` will have all the utilities class, including shared ones.
+- The folder in `main/` and `test/` will be mirrored.
+- All the test cases (eg: txt files) will be placed in `resources/` folder.
+
+### How to decide if a class should go in a `utils` folder or its own dedicated folder
+
+1. Does it only contain static methods or helper methods? -> Place in `utils`.
+2. Does it represent a core concept or entity in the application? -> Place in a domain-specific folder.
+3. Is it used only within a specific module? -> Place it in that module's folder.
+4. Does it provide generic functionality used across the application? -> Place in `utils`.
+
 ## General Instructions
 
 - Use language features up to the latest Java LTS version
