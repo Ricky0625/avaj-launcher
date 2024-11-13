@@ -1,12 +1,13 @@
+import fake.FakeTest;
+
 public class MainTestSuite {
 
-	public static void main(String[] args) {
-		System.out.println("Avaj Launcher tests...");
-
-		// run test here
-		// each Test class should have a runAllTests() function
-		// to run all the test functions in the class
-		// idea: Have an interface/abstract class to define the signature
+	/**
+	 * @param args
+	 */
+	public static void main(final String[] args) {
+		// TODO: find all classes that extends TestRunner, invoke runAllTests()
+		new FakeTest().runAllTests();
 	}
 
 }
