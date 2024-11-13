@@ -14,8 +14,10 @@ OUT_TEST_DIR	:= out/test
 MAIN_CLASS		:= main.java.com.fourtytwo.avajlauncher.AvajLauncher
 TEST_MAIN_CLASS	:= MainTestSuite
 
-SRC_FILES = $(shell find $(SRC_MAIN) -name "*.java")
-TEST_FILES = $(shell find $(SRC_TEST) -name "*.java")
+SRC_FILES		= $(shell find $(SRC_MAIN) -name "*.java")
+TEST_FILES		= $(shell find $(SRC_TEST) -name "*.java")
+
+SCENARIO		?= 
 
 #------------------------------------------------------------------------------#
 #   RECIPE                                                                     #
@@ -30,7 +32,7 @@ compile-tests: compile
 	javac -cp $(OUT_DIR) -d $(OUT_TEST_DIR) $(TEST_FILES)
 
 run: compile
-	java -cp $(OUT_DIR) $(MAIN_CLASS)
+	java -cp $(OUT_DIR) $(MAIN_CLASS) $(SCENARIO)
 
 run-tests: compile-tests
 	java -cp $(OUT_DIR):$(OUT_TEST_DIR) $(TEST_MAIN_CLASS)
