@@ -53,6 +53,13 @@ src/
 - The folder in `main/` and `test/` will be mirrored.
 - All the test cases (eg: txt files) will be placed in `resources/` folder.
 
+### Test setup
+
+1. One main test suite class to serve as the entry point and execute each individual test class.
+2. For each of the FeatureTestClass, will have a `runTests()` method to group all tests for each class.
+3. Have a group of utility functions to do testing.
+4. Group related test classes together in a folder.
+
 ### How to decide if a class should go in a `utils` folder or its own dedicated folder
 
 1. Does it only contain static methods or helper methods? -> Place in `utils`.
