@@ -5,43 +5,65 @@ import java.util.ArrayList;
 import java.util.List;
 
 import utils.LoggerUtils;
+import utils.TestCase;
 
 public abstract class TestRunner {
 
 	private final String TEST_CASE_PREFIX = "test";
+	private final String TEST_CASE_WITH_EXCEPTION_PREFIX = "expectThrows";
 
 	public void runAllTests() {
-		final List<Method> testCases = getTestCases();
-
-		LoggerUtils.info("Running tests in " + this.getClass().getName());
+		final List<TestCase> testCases = getTestCases();
+		int total = 0, passed = 0, failed = 0;
 
 		if (testCases.isEmpty()) {
 			LoggerUtils.info("No tests to run.");
 			return;
 		}
 
-		for (final Method testCase : testCases) {
+		total = testCases.size();
+
+		for (final TestCase testCase : testCases) {
+
+			final Method method = testCase.getMethod();
+			final boolean expectException = testCase.getExpectException();
+			final String methodName = method.getName();
+
 			try {
-				testCase.invoke(this);
-				LoggerUtils.testCase(testCase.getName(), true);
+				method.invoke(this);
+
+				if (expectException) {
+					LoggerUtils.testCase(methodName, false);
+					failed++;
+				} else {
+					LoggerUtils.testCase(methodName, true);
+					passed++;
+				}
 			} catch (final Exception e) {
-				LoggerUtils.testCase(testCase.getName(), false);
-				e.printStackTrace();
+				if (expectException) {
+					LoggerUtils.testCase(methodName, true);
+					passed++;
+				} else {
+					LoggerUtils.testCase(method.getName(), false);
+					failed++;
+					e.printStackTrace();
+				}
 			}
 		}
 
-		// TODO: count how many pass and fail
-		System.out.println();
+		LoggerUtils.testResult(total, passed, failed);
 	}
 
-	private List<Method> getTestCases() {
+	private List<TestCase> getTestCases() {
 		final Class<?> childClass = this.getClass();
 		final Method[] methods = childClass.getDeclaredMethods();
-		final List<Method> testCases = new ArrayList<>();
+		final List<TestCase> testCases = new ArrayList<>();
 
 		for (final Method method : methods) {
 			if (method.getName().startsWith(TEST_CASE_PREFIX)) {
-				testCases.add(method);
+				testCases.add(new TestCase(method, false));
+			} else if (method.getName().startsWith(TEST_CASE_WITH_EXCEPTION_PREFIX)) {
+				testCases.add(new TestCase(method, true));
 			}
 		}
 
