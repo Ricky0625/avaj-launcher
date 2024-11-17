@@ -26,9 +26,9 @@
     - [ ] Height is in the **0-100** range
     - [ ] **(OWN)** Allows any whitespaces. Leading, in between and trailing.
 
-- [ ] Tester
-    - [ ] Have a helper class to do testing
-    - [ ] Setup recipe in Makefile to run tests
+- [x] Tester
+    - [x] Have a helper class to do testing
+    - [x] Setup recipe in Makefile to run tests
 
 ## Setup
 
@@ -94,3 +94,19 @@ Program should take in one argument, which is the name of a text file that will 
 ### Scneario file
 
 The first line of the file contains a **positive integer number**. This number represents the number of times the simulation is run.
+
+## Concepts
+
+### Dependency Injection (DI)
+
+Dependency Injection is a design principle where an object (like a class) receives its dependencies from an external source rather than creating them itself. This improves modularity and makes the code easier to test, extend, and maintain by reducing direct coupling between classes.
+
+#### How Dependency Injection Works
+
+Let's say you have a `FileParser` that needs a `HeaderParser` and `ContentParser`. Without DI, `FileParser` would create instances of `HeaderParser` and `ContentParser` itself, directly coupling it to those specific implementations. DI separates this responsibility by "injecting" those dependencies into `FileParser`, either via the constructor or a setter method.
+
+#### DI in Practice
+
+1. **Constructor Injection**: Pass the dependencies as parameters in the constructor. This is ideal if the dependencies are essential for the object's function.
+2. **Setter Injection**: Inject dependencies through setter mtehods. This allows the dependencies to be optional or configurable after the object is created.
+
