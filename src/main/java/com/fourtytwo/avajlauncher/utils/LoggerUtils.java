@@ -36,6 +36,10 @@ public class LoggerUtils {
 		}
 	}
 
+	public static void testResult(final int total, final int passed, final int failed) {
+		System.out.println("	" + GREEN + total + " test cases. +" + passed + " -" + failed + RESET + "\n");
+	}
+
 	public static void log(final String color, final String tag, final String message) {
 		System.out.print(color);
 		if (tag != null) {
