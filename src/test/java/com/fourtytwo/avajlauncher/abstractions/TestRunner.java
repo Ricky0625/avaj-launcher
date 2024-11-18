@@ -1,6 +1,8 @@
 package abstractions;
 
 import java.lang.reflect.Method;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,6 +13,11 @@ public abstract class TestRunner {
 
 	private final String TEST_CASE_PREFIX = "test";
 	private final String TEST_CASE_WITH_EXCEPTION_PREFIX = "expectThrows";
+	private final static String TEST_RESOURCES_DIR = "src/test/resources";
+
+	public TestRunner() {
+		LoggerUtils.log("", null, "🐻 Init " + getClass().getName());
+	}
 
 	public void runAllTests() {
 		final List<TestCase> testCases = getTestCases();
@@ -44,9 +51,8 @@ public abstract class TestRunner {
 					LoggerUtils.testCase(methodName, true);
 					passed++;
 				} else {
-					LoggerUtils.testCase(method.getName(), false);
+					LoggerUtils.testCase(method.getName(), false, e.getCause().getMessage());
 					failed++;
-					e.printStackTrace();
 				}
 			}
 		}
@@ -68,6 +74,10 @@ public abstract class TestRunner {
 		}
 
 		return testCases;
+	}
+
+	public static Path getTestFilePath(String filename) {
+		return Paths.get(TEST_RESOURCES_DIR, filename);
 	}
 
 }
