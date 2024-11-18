@@ -28,12 +28,25 @@ public class LoggerUtils {
 	}
 
 	public static void testCase(final String message, boolean pass) {
-		System.out.print("	" + message + "	");
 		if (pass) {
-			System.out.println(GREEN + "[PASS]" + RESET);
+			System.out.print(GREEN + "	[PASS]");
 		} else {
-			System.out.println(RED + "[FAIL]" + RESET);
+			System.out.print(RED + "	[FAIL]");
 		}
+		System.out.println(" " + message + RESET);
+	}
+
+	public static void testCase(final String message, boolean pass, final String context) {
+		if (pass) {
+			System.out.print(GREEN + "	[PASS]");
+		} else {
+			System.out.print(RED + "	[FAIL]");
+		}
+		System.out.print(" " + message);
+		if (context != null) {
+			System.out.print(": " + context);
+		}
+		System.out.println(RESET);
 	}
 
 	public static void testResult(final int total, final int passed, final int failed) {
