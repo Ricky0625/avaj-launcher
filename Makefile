@@ -11,7 +11,7 @@ OUT_DIR			:= out
 OUT_TEST_DIR	:= out/test
 
 # Main
-MAIN_CLASS		:= main.java.com.fourtytwo.avajlauncher.AvajLauncher
+MAIN_CLASS		:= AvajLauncher
 TEST_MAIN_CLASS	:= MainTestSuite
 
 SRC_FILES		= $(shell find $(SRC_MAIN) -name "*.java")

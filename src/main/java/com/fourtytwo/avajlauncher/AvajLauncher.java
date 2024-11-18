@@ -1,5 +1,3 @@
-package main.java.com.fourtytwo.avajlauncher;
-
 /**
  * AvajLauncher
  */
