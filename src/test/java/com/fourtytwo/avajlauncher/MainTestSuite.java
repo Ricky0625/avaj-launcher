@@ -8,15 +8,20 @@ public class MainTestSuite {
 	 * @param args
 	 */
 	public static void main(final String[] args) {
-		// Register all the TestRunner classes here
-		TestRunner[] runners = {
-				new FileSourceTest()
-		};
+		try {
+			// Register all the TestRunner classes here
+			TestRunner[] runners = {
+					new FileSourceTest(),
+			};
 
-		for (TestRunner runner : runners) {
-			LoggerUtils.info("Running [" + runner.getClass().getName() + "] test cases");
-			runner.runAllTests();
-			System.out.println();
+			for (TestRunner runner : runners) {
+				LoggerUtils.info("Running [" + runner.getClass().getName() + "] test cases");
+				runner.runAllTests();
+				System.out.println();
+			}
+		} catch (Exception ex) {
+			LoggerUtils.error("Failed to initialize TestRunner");
+			ex.printStackTrace();
 		}
 	}
 
