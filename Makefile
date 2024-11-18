@@ -34,15 +34,16 @@ compile-tests: compile
 run: print-main-art compile
 	@java -cp $(OUT_DIR) $(MAIN_CLASS) $(SCENARIO)
 
-run-tests: print-test-art compile-tests
+tests: print-test-art compile-tests
 	@java -cp $(OUT_DIR):$(OUT_TEST_DIR) $(TEST_MAIN_CLASS)
 
 clean:
 	@rm -rf $(OUT_DIR) $(OUT_TEST_DIR)
+	@echo "🧹 Deleted out/"
 
 re: clean run
 
-re-test: clean run-tests
+retest: clean tests
 
 print-art: 
 	@echo "    __"
