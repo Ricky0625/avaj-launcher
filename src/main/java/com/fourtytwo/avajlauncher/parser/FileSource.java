@@ -4,7 +4,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 
-public class FileSource {
+public class FileSource implements AutoCloseable {
 
 	private final BufferedReader reader;
 	private String currentLine;
@@ -24,18 +24,18 @@ public class FileSource {
 		return currentLine;
 	}
 
-	public void setCurrentLine(final String currentLine) {
-		this.currentLine = currentLine;
-	}
-
 	/**
 	 * Use this for the read-get loop
 	 * 
 	 * @return true if not EOF, false if EOF
-	 * @throws IOException
 	 */
-	public boolean nextLine() throws IOException {
-		advance();
+	public boolean nextLine() {
+		try {
+			advance();
+		} catch (final IOException ex) {
+			// hmmmm...
+			return false;
+		}
 		return currentLine != null;
 	}
 
@@ -43,6 +43,7 @@ public class FileSource {
 		currentLine = reader.readLine();
 	}
 
+	@Override
 	public void close() throws IOException {
 		if (reader != null) {
 			reader.close();
