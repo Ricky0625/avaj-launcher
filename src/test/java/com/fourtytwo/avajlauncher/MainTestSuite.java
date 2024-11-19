@@ -1,5 +1,6 @@
 import abstractions.TestRunner;
 import parser.FileSourceTest;
+import parser.PositiveNumberParserTest;
 import utils.LoggerUtils;
 
 public class MainTestSuite {
@@ -12,6 +13,7 @@ public class MainTestSuite {
 			// Register all the TestRunner classes here
 			TestRunner[] runners = {
 					new FileSourceTest(),
+					new PositiveNumberParserTest(),
 			};
 
 			for (TestRunner runner : runners) {
