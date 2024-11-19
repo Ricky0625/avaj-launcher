@@ -13,7 +13,7 @@ public class FileSourceTest extends TestRunner {
 	public FileSourceTest() throws IOException {
 		try {
 			testLoadFile();
-		} catch (Exception ex) {
+		} catch (final Exception ex) {
 			throw ex;
 		}
 	}
