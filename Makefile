@@ -46,18 +46,18 @@ re: clean run
 retest: clean tests
 
 print-art: 
-	@echo "    __"
-	@echo "    \  \     _ _"
-	@echo "     \\**\\ ___\\/ \\"
-	@echo "   X*#####*+^^\\__\\"
-	@echo "     o/\\  \\"
-	@echo "        \\__\\"
-	@echo "    AVAJ_LAUNCHER"
+	@echo "            __"
+	@echo "            \  \     _ _"
+	@echo "            \\**\\ ___\\/ \\"
+	@echo "          X*#####*+^^\\__\\"
+	@echo "            o/\\  \\"
+	@echo "               \\__\\"
+	@echo "           AVAJ_LAUNCHER"
 
 print-main-art: print-art
-	@echo '        [MAIN]'
+	@echo '               [MAIN]'
 	@echo
 
 print-test-art: print-art
-	@echo '        [TEST]'
+	@echo '               [TEST]'
 	@echo
