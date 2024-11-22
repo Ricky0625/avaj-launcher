@@ -1,5 +1,8 @@
 import abstractions.TestRunner;
 import parser.FileSourceTest;
+import parser.IntegerParserTest;
+import parser.LatitudeParserTest;
+import parser.LongitudeParserTest;
 import parser.PositiveNumberParserTest;
 import utils.LoggerUtils;
 
@@ -13,7 +16,10 @@ public class MainTestSuite {
 			// Register all the TestRunner classes here
 			TestRunner[] runners = {
 					new FileSourceTest(),
+					new IntegerParserTest(),
 					new PositiveNumberParserTest(),
+					new LatitudeParserTest(),
+					new LongitudeParserTest(),
 			};
 
 			for (TestRunner runner : runners) {
