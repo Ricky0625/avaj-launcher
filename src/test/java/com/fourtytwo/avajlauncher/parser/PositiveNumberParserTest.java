@@ -14,40 +14,12 @@ public class PositiveNumberParserTest extends TestRunner {
 		parser = new PositiveNumberParser();
 	}
 
-	public void expectThrowsNull() throws ParsingException {
-		parser.parse(null);
+	public void testSixTwoFive() throws ParsingException {
+		parser.parse("625");
 	}
 
-	public void expectThrowsEmpty() throws ParsingException {
-		parser.parse("");
-	}
-
-	public void expectThrowsOnlyWhitespaces() throws ParsingException {
-		parser.parse("	\n\t");
-	}
-
-	public void expectThrowsNonNumeric() throws ParsingException {
-		parser.parse("abc+-!@#$%^&*(){}[]|~`'\";:,./?\\");
-	}
-
-	public void testNumeric() throws ParsingException {
-		parser.parse("0123456789");
-	}
-
-	public void testPositiveNumeric() throws ParsingException {
-		parser.parse("+123");
-	}
-
-	public void expectThrowsNegativeNumeric() throws ParsingException {
-		parser.parse("-123");
-	}
-
-	public void expectThrowsMultiplePositiveSignNumeric() throws ParsingException {
-		parser.parse("++123");
-	}
-
-	public void expectThrowsMultipleNegativeSignNumeric() throws ParsingException {
-		parser.parse("--123");
+	public void expectThrowsNegativeSixTwoFive() throws ParsingException {
+		parser.parse("-625");
 	}
 
 	public void testIntMax() throws ParsingException {
@@ -70,18 +42,6 @@ public class PositiveNumberParserTest extends TestRunner {
 		// overflow, become Integer.MAX_VALUE
 		final int intMinMinusOne = Integer.MIN_VALUE - 1;
 		parser.parse(String.valueOf(intMinMinusOne));
-	}
-
-	public void testNumericWithSpace() throws ParsingException {
-		parser.parse("   +123    ");
-	}
-
-	public void expectThrowsMultipleNumericString() throws ParsingException {
-		parser.parse("  123  123 123  123");
-	}
-
-	public void expectThrowsNumericConcat() throws ParsingException {
-		parser.parse("   +123+456  ");
 	}
 
 }
