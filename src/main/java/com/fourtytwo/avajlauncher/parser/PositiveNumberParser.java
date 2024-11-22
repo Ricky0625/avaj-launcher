@@ -1,7 +1,6 @@
 package parser;
 
 import exceptions.ParsingException;
-import interfaces.Parser;
 
 public class PositiveNumberParser implements Parser<Integer> {
 

@@ -1,4 +1,4 @@
-package interfaces;
+package parser;
 
 import exceptions.ParsingException;
 
