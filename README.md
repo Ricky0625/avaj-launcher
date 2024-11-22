@@ -110,3 +110,24 @@ Let's say you have a `FileParser` that needs a `HeaderParser` and `ContentParser
 1. **Constructor Injection**: Pass the dependencies as parameters in the constructor. This is ideal if the dependencies are essential for the object's function.
 2. **Setter Injection**: Inject dependencies through setter mtehods. This allows the dependencies to be optional or configurable after the object is created.
 
+## Thoughts
+
+### Flyable is an interface or an abstract class?
+
+From the UML, the `(A)` beside the `Flyable` class name suggests that it is an abstract class. However, after analyzing the UML as a whole, this design seems debatable.
+
+The solid arrows from `Helicopter`, `Jetplane`, and `Baloon` all point to `Aircraft`, not `Flyable`, indicating that these classes inherit shared fields (id, name, coordinates) from `Aircraft`, not `Flyable`. Furthermore, there is no inheritance relationship shown between `Flyable` and any other class. This raises an important question: What's the purpose of an abstract class that no other class inherits from?
+
+Looking at the methods within `Flyable`, `updateConditions()` and `registerTower()` - they appear to define a contract for flying behavior. Any class that represents a flying object should implement these behaviors. This is conceptually aligned with an interface, which defines a set of behaviors without enforcing inheritance.
+
+The design of making `Flyable` an interface in this case will make sense, since we are decoupling the flying behaviors from any structural or state-related concerns, which are already handled by `Aircraft`.
+
+In conclusion, while the initial UML design suggested that `Flyable` should be an abstract class, treating it as an interface seems more appropriate. It aligns with the methods' intent and keeps the design flexible.
+
+```text
+Aircraft implements Flyable
+Helicopter extends Aircraft
+Jetplane extends Aircraft
+Baloon extends Aircraft
+```
+
