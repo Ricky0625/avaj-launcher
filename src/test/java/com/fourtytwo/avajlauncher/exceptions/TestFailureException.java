@@ -1,7 +1,5 @@
 package exceptions;
 
-import abstractions.BaseException;
-
 public class TestFailureException extends BaseException {
 
 	public TestFailureException(String msg) {

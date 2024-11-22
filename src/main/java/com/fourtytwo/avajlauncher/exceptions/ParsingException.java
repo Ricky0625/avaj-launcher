@@ -1,7 +1,5 @@
 package exceptions;
 
-import abstractions.BaseException;
-
 public class ParsingException extends BaseException {
 
 	public ParsingException(String msg) {

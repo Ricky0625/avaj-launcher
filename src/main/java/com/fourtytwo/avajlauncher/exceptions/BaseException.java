@@ -1,4 +1,4 @@
-package abstractions;
+package exceptions;
 
 /**
  * BaseException: Parent for the custom exceptions
