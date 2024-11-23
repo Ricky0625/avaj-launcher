@@ -1,5 +1,7 @@
 import abstractions.TestRunner;
+import parser.AircraftTypeParserTest;
 import parser.FileSourceTest;
+import parser.HeightParserTest;
 import parser.IntegerParserTest;
 import parser.LatitudeParserTest;
 import parser.LongitudeParserTest;
@@ -20,6 +22,8 @@ public class MainTestSuite {
 					new PositiveNumberParserTest(),
 					new LatitudeParserTest(),
 					new LongitudeParserTest(),
+					new AircraftTypeParserTest(),
+					new HeightParserTest(),
 			};
 
 			for (TestRunner runner : runners) {
