@@ -5,7 +5,7 @@ public enum AircraftType {
     JETPLANE,
     BALOON;
 
-    public static AircraftType fromString(String name) {
+    public static AircraftType fromString(String name) throws IllegalArgumentException {
         return AircraftType.valueOf(name.toUpperCase());
     }
 
