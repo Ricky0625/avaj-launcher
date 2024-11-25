@@ -11,7 +11,7 @@ public class LongitudeParser extends IntegerParser {
 
 	private Integer validateLongitude(final Integer longitude) throws ParsingException {
 		if (longitude < -180 || longitude > 180) {
-			throw new ParsingException("Invalid longitude value! [-90, 90]. Received: " + longitude);
+			throw new ParsingException("Invalid longitude value! [-180, 180]. Received: " + longitude);
 		}
 		return longitude;
 	}
