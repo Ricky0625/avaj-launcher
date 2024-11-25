@@ -3,9 +3,11 @@ import parser.AircraftTypeParserTest;
 import parser.FileSourceTest;
 import parser.HeightParserTest;
 import parser.IntegerParserTest;
+import parser.LatitudeParser;
 import parser.LatitudeParserTest;
 import parser.LongitudeParserTest;
 import parser.PositiveNumberParserTest;
+import parser.ScenarioParserTest;
 import utils.LoggerUtils;
 
 public class MainTestSuite {
@@ -24,6 +26,7 @@ public class MainTestSuite {
 					new LongitudeParserTest(),
 					new AircraftTypeParserTest(),
 					new HeightParserTest(),
+					new ScenarioParserTest(),
 			};
 
 			for (TestRunner runner : runners) {
