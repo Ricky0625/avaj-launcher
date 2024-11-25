@@ -3,8 +3,8 @@
 #------------------------------------------------------------------------------#
 
 # Sources
-SRC_MAIN		:= src/main/java
-SRC_TEST		:= src/test/java
+SRC_MAIN		:= src/main
+SRC_TEST		:= src/test
 
 # Output files (.class files)
 OUT_DIR			:= out
