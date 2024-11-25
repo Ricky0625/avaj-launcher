@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import abstractions.TestRunner;
 import exceptions.TestFailureException;
+import utils.FileSource;
 
 public class FileSourceTest extends TestRunner {
 
