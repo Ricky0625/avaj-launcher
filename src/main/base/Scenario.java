@@ -6,21 +6,12 @@ public class Scenario {
 
     private final AircraftType type;
     private final String name;
-    private final int longitude;
-    private final int latitude;
-    private final int height;
+    private final Coordinates coordinates;
 
-    public Scenario(
-            final AircraftType type,
-            final String name,
-            final int longitude,
-            final int latitude,
-            final int height) {
+    public Scenario(final AircraftType type, final String name, final Coordinates coordinates) {
         this.type = type;
         this.name = name;
-        this.longitude = longitude;
-        this.latitude = latitude;
-        this.height = height;
+        this.coordinates = coordinates;
     }
 
     public AircraftType getType() {
@@ -31,15 +22,8 @@ public class Scenario {
         return name;
     }
 
-    public int getLongitude() {
-        return longitude;
+    public Coordinates getCoordinates() {
+        return coordinates;
     }
 
-    public int getLatitude() {
-        return latitude;
-    }
-
-    public int getHeight() {
-        return height;
-    }
 }

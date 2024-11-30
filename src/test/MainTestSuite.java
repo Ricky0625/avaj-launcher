@@ -1,11 +1,8 @@
 import abstractions.TestRunner;
 import parser.AircraftTypeParserTest;
+import parser.CoordinateParserTest;
 import parser.FileSourceTest;
-import parser.HeightParserTest;
 import parser.IntegerParserTest;
-import parser.LatitudeParser;
-import parser.LatitudeParserTest;
-import parser.LongitudeParserTest;
 import parser.PositiveNumberParserTest;
 import parser.ScenarioParserTest;
 import utils.LoggerUtils;
@@ -22,11 +19,9 @@ public class MainTestSuite {
 					new FileSourceTest(),
 					new IntegerParserTest(),
 					new PositiveNumberParserTest(),
-					new LatitudeParserTest(),
-					new LongitudeParserTest(),
 					new AircraftTypeParserTest(),
-					new HeightParserTest(),
 					new ScenarioParserTest(),
+					new CoordinateParserTest(),
 			};
 
 			for (TestRunner runner : runners) {

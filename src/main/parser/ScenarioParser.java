@@ -1,41 +1,33 @@
 package parser;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.Arrays;
 
 import base.Scenario;
 import exceptions.ParsingException;
-import types.AircraftType;
 
 public class ScenarioParser implements Parser<Scenario> {
 
-	private final Map<Integer, Parser<?>> parsers = new HashMap<>();
+	// parser
+	private AircraftTypeParser aircraftTypeParser;
+	private CoordinateParser coordinateParser;
+
 	private static final int EXPECT_TOKEN_COUNT = 5;
 
-	public ScenarioParser(
-			AircraftTypeParser aTypeParser,
-			LongitudeParser loParser,
-			LatitudeParser laParser,
-			HeightParser hParser) {
-		parsers.put(0, aTypeParser);
-		parsers.put(2, loParser);
-		parsers.put(3, laParser);
-		parsers.put(4, hParser);
+	public ScenarioParser(AircraftTypeParser aTypeParser, CoordinateParser cParser) {
+		aircraftTypeParser = aTypeParser;
+		coordinateParser = cParser;
 	}
 
 	@Override
 	public Scenario parse(String content) throws ParsingException {
 		String[] tokens = splitToken(content);
-		Object[] parsedTokens;
 
 		validateTokenCount(tokens);
-		parsedTokens = validateTokens(tokens);
+
 		return new Scenario(
-				(AircraftType) parsedTokens[0],
-				(String) parsedTokens[1],
-				(Integer) parsedTokens[2],
-				(Integer) parsedTokens[3],
-				(Integer) parsedTokens[4]);
+				aircraftTypeParser.parse(tokens[0]),
+				tokens[1],
+				coordinateParser.parse(Arrays.stream(tokens, 2, 5).toArray(String[]::new)));
 	}
 
 	private String[] splitToken(String content) throws ParsingException {
@@ -52,20 +44,6 @@ public class ScenarioParser implements Parser<Scenario> {
 		if (tokens.length != EXPECT_TOKEN_COUNT) {
 			throw new ParsingException("Invalid format: TYPE NAME LONGITUDE LATITUDE HEIGHT");
 		}
-	}
-
-	private Object[] validateTokens(final String[] tokens) throws ParsingException {
-		Object[] parsedTokens = new Object[tokens.length];
-
-		for (int i = 0; i < tokens.length; i++) {
-			if (parsers.containsKey(i)) {
-				parsedTokens[i] = parsers.get(i).parse(tokens[i]);
-			} else {
-				parsedTokens[i] = tokens[i];
-			}
-		}
-
-		return parsedTokens;
 	}
 
 }

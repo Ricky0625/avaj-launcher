@@ -10,9 +10,7 @@ public class ScenarioParserTest extends TestRunner {
 	public ScenarioParserTest() {
 		parser = new ScenarioParser(
 				new AircraftTypeParser(),
-				new LongitudeParser(),
-				new LatitudeParser(),
-				new HeightParser());
+				new CoordinateParser());
 	}
 
 	public void expectThrowsEmptyScenarioLine() throws ParsingException {
