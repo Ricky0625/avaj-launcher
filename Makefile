@@ -46,8 +46,8 @@ re: clean run
 retest: clean tests
 
 print-art: 
-	@echo "            __"
-	@echo "            \  \     _ _"
+	@echo "           __"
+	@echo "           \  \     _ _"
 	@echo "            \\**\\ ___\\/ \\"
 	@echo "          X*#####*+^^\\__\\"
 	@echo "            o/\\  \\"
