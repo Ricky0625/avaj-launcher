@@ -52,7 +52,6 @@ public class Simulation {
         while (source.nextLine()) {
             scenarios.add(contentParser.parse(source.getCurrentLine()));
         }
-
         return scenarios;
     }
 
