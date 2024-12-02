@@ -1,6 +1,6 @@
 package base;
 
-public class Aircraft implements Flyable {
+public class Aircraft extends Flyable {
     protected long id;
     protected String name;
     protected Coordinates coordinates;
@@ -14,4 +14,13 @@ public class Aircraft implements Flyable {
     @Override
     public void updateConditions() {
     }
+
+    public String getAircraftType() {
+        return "UNKNOWN";
+    }
+
+    public String getPrefix() {
+        return String.format("%s#%s(%d): ", getAircraftType(), name, id);
+    }
+
 }
