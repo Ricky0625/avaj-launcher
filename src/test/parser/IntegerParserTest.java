@@ -2,6 +2,7 @@ package parser;
 
 import abstractions.TestRunner;
 import exceptions.ParsingException;
+import utils.LoggerUtils;
 
 public class IntegerParserTest extends TestRunner {
 
@@ -57,5 +58,15 @@ public class IntegerParserTest extends TestRunner {
 
 	public void expectThrowsNumericConcat() throws ParsingException {
 		parser.parse("   +123+456  ");
+	}
+
+	public void expectThrowsIntMaxPlusOne() throws ParsingException {
+		final long intMaxPlusOne = (long) Integer.MAX_VALUE + 1;
+		parser.parse(String.valueOf(intMaxPlusOne));
+	}
+
+	public void expectThrowsIntMinMinusOne() throws ParsingException {
+		final long intMinMinusOne = (long) Integer.MIN_VALUE - 1;
+		parser.parse(String.valueOf(intMinMinusOne));
 	}
 }

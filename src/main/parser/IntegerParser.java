@@ -17,10 +17,19 @@ public class IntegerParser implements Parser<Integer> {
 		}
 	}
 
+	private void checkIntegerOverflow(final long number) throws ParsingException {
+		if (number > Integer.MAX_VALUE) {
+			throw new ParsingException("Integer Max overflow!");
+		} else if (number < Integer.MIN_VALUE) {
+			throw new ParsingException("Integer Min overflow!");
+		}
+	}
+
 	private Integer parseInteger(final String content) throws ParsingException {
 		try {
-			final Integer number = Integer.parseInt(content);
-			return number;
+			final long number = Long.parseLong(content);
+			checkIntegerOverflow(number);
+			return (int) number;
 		} catch (final Exception e) {
 			throw new ParsingException("Invalid number format: " + content);
 		}
