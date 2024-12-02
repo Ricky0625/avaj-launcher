@@ -26,4 +26,9 @@ public class Scenario {
         return coordinates;
     }
 
+    @Override
+    public String toString() {
+        return "[TYPE] " + type.toString() + "\n[NAME] " + name + "\n[Coord] " + coordinates.toString();
+    }
+
 }

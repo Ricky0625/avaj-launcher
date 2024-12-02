@@ -8,9 +8,7 @@ public class ScenarioParserTest extends TestRunner {
 	private final ScenarioParser parser;
 
 	public ScenarioParserTest() {
-		parser = new ScenarioParser(
-				new AircraftTypeParser(),
-				new CoordinateParser());
+		parser = new ScenarioParser();
 	}
 
 	public void expectThrowsEmptyScenarioLine() throws ParsingException {
@@ -29,16 +27,8 @@ public class ScenarioParserTest extends TestRunner {
 		parser.parse("BOEING737 test 20 20 20");
 	}
 
-	public void expectThrowsInvalidLongtitude() throws ParsingException {
-		parser.parse("Baloon test 270 20 20");
-	}
-
-	public void expectThrowsInvalidLatitude() throws ParsingException {
-		parser.parse("Baloon test 20 -270 20");
-	}
-
-	public void expectThrowsInvalidHeight() throws ParsingException {
-		parser.parse("Baloon test 20 80 101");
+	public void testHeightExceedMaxShouldBeValid() throws ParsingException {
+		parser.parse("Baloon test 20 80 658");
 	}
 
 	public void testValidScenario() throws ParsingException {

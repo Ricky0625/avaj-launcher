@@ -13,9 +13,9 @@ public class ScenarioParser implements Parser<Scenario> {
 
 	private static final int EXPECT_TOKEN_COUNT = 5;
 
-	public ScenarioParser(AircraftTypeParser aTypeParser, CoordinateParser cParser) {
-		aircraftTypeParser = aTypeParser;
-		coordinateParser = cParser;
+	public ScenarioParser() {
+		aircraftTypeParser = new AircraftTypeParser();
+		coordinateParser = new CoordinateParser();
 	}
 
 	@Override
