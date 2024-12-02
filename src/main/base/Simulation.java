@@ -1,6 +1,5 @@
 package base;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,13 +21,13 @@ public class Simulation {
     private int numOfSimulation;
     private List<Scenario> scenarios = new ArrayList<Scenario>();
 
-    private Simulation(final String fileName) throws IOException {
+    private Simulation(final String fileName) throws Exception {
         source = new FileSource(fileName);
         headerParser = new PositiveNumberParser();
         contentParser = new ScenarioParser();
     }
 
-    public static Simulation getInstance(final String fileName) throws IOException {
+    public static Simulation getInstance(final String fileName) throws Exception {
         if (instance == null) {
             instance = new Simulation(fileName);
         }
