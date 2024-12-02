@@ -2,6 +2,7 @@ package aircraft;
 
 import base.Aircraft;
 import base.Coordinates;
+import types.AircraftType;
 
 public class Baloon extends Aircraft {
 
@@ -11,6 +12,11 @@ public class Baloon extends Aircraft {
 
     @Override
     public void updateConditions() {
+    }
+
+    @Override
+    public String getAircraftType() {
+        return AircraftType.BALOON.toString();
     }
 
 }

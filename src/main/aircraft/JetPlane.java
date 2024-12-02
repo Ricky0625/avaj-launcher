@@ -2,6 +2,7 @@ package aircraft;
 
 import base.Aircraft;
 import base.Coordinates;
+import types.AircraftType;
 
 public class JetPlane extends Aircraft {
 
@@ -13,4 +14,8 @@ public class JetPlane extends Aircraft {
     public void updateConditions() {
     }
 
+    @Override
+    public String getAircraftType() {
+        return AircraftType.JETPLANE.toString();
+    }
 }
