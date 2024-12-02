@@ -1,15 +1,22 @@
+import base.Simulation;
+import utils.LoggerUtils;
+
 /**
  * AvajLauncher
  */
 public class AvajLauncher {
 
     public static void main(final String[] args) {
-        System.out.println("Hello world!");
-        if (args.length > 0) {
-            String filePath = args[0];
-            System.out.println("File path provided: " + filePath);
-        } else {
-            System.out.println("No file path provided");
+        try {
+            if (args.length != 1) {
+                throw new Exception("Invalid usage! make run SCENARIO=<file.txt>");
+            }
+
+            Simulation sim = Simulation.getInstance(args[0]);
+            sim.initSimulation();
+            sim.show();
+        } catch (Exception e) {
+            LoggerUtils.error(e.getMessage());
         }
     }
 
