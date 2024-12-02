@@ -1,7 +1,7 @@
 import abstractions.TestRunner;
 import parser.AircraftTypeParserTest;
 import parser.CoordinateParserTest;
-import parser.FileSourceTest;
+import utils.FileSourceTest;
 import parser.IntegerParserTest;
 import parser.PositiveNumberParserTest;
 import parser.ScenarioParserTest;
