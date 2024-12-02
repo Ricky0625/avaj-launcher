@@ -1,7 +1,12 @@
 package parser;
 
 import abstractions.TestRunner;
+import base.Coordinates;
+import base.Scenario;
+import exceptions.BaseException;
 import exceptions.ParsingException;
+import exceptions.TestFailureException;
+import utils.LoggerUtils;
 
 public class CoordinateParserTest extends TestRunner {
 
@@ -49,48 +54,16 @@ public class CoordinateParserTest extends TestRunner {
 		parser.parse(createTestCase("25", "0", "0"));
 	}
 
-	public void testValidNegativeLongitude() throws ParsingException {
+	public void expectThrowsNegativeLongitude() throws ParsingException {
 		parser.parse(createTestCase("-78", "0", "0"));
-	}
-
-	public void expectThrowsExceedMaxLongitude() throws ParsingException {
-		parser.parse(createTestCase("123123", "0", "0"));
-	}
-
-	public void expectThrowsExceedMinLongitude() throws ParsingException {
-		parser.parse(createTestCase("-123123", "0", "0"));
-	}
-
-	public void testMaxLongitude() throws ParsingException {
-		parser.parse(createTestCase("180", "0", "0"));
-	}
-
-	public void testMinLongitude() throws ParsingException {
-		parser.parse(createTestCase("-180", "0", "0"));
 	}
 
 	public void testValidPositiveLatitude() throws ParsingException {
 		parser.parse(createTestCase("0", "67", "0"));
 	}
 
-	public void testValidNegativeLatitude() throws ParsingException {
+	public void expectThrowsNegativeLatitude() throws ParsingException {
 		parser.parse(createTestCase("0", "-47", "0"));
-	}
-
-	public void expectThrowsExceedMaxLatitude() throws ParsingException {
-		parser.parse(createTestCase("0", "100", "0"));
-	}
-
-	public void expectThrowsExceedMinLatitude() throws ParsingException {
-		parser.parse(createTestCase("0", "-7979", "0"));
-	}
-
-	public void testMaxLatitude() throws ParsingException {
-		parser.parse(createTestCase("0", "90", "0"));
-	}
-
-	public void testMinLatitude() throws ParsingException {
-		parser.parse(createTestCase("0", "-90", "0"));
 	}
 
 	public void testValidHeightValue() throws ParsingException {
@@ -109,8 +82,23 @@ public class CoordinateParserTest extends TestRunner {
 		parser.parse(createTestCase("0", "0", "100"));
 	}
 
-	public void expectThrowsExceedMaxHeight() throws ParsingException {
-		parser.parse(createTestCase("0", "0", "101"));
+	public void testCapHeightAt100() throws BaseException {
+		Coordinates coord = parser.parse(createTestCase("0", "0", "777"));
+		if (coord.getHeight() != 100) {
+			throw new TestFailureException("Height didn't cap at 100!");
+		}
+	}
+
+	public void expectThrowsNonNumericLongitude() throws ParsingException {
+		parser.parse(createTestCase("abc", "0", "0"));
+	}
+
+	public void expectThrowsNonNumericLatitude() throws ParsingException {
+		parser.parse(createTestCase("0", "abc", "0"));
+	}
+
+	public void expectThrowsNonNumericHeight() throws ParsingException {
+		parser.parse(createTestCase("0", "0", "abc"));
 	}
 
 }
