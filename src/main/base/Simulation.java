@@ -9,6 +9,7 @@ import parser.PositiveNumberParser;
 import parser.ScenarioParser;
 import utils.FileSource;
 import utils.LoggerUtils;
+import weather.WeatherProvider;
 
 public class Simulation {
 
@@ -56,8 +57,9 @@ public class Simulation {
     public void show() {
         for (Scenario s : scenarios) {
             LoggerUtils.debug(
-                    "\n[TYPE] " + s.getType() + "\n[NAME] " + s.getName() + "\n[Coord] " + s.getCoordinates().toString()
-                            + "\n");
+                    "\n[TYPE] " + s.getType() + "\n[NAME] " + s.getName() + "\n[Coord] "
+                            + s.getCoordinates().toString());
+            LoggerUtils.warn("Weather: " + WeatherProvider.getInstance().getCurrentWeather(s.getCoordinates()) + "\n");
         }
     }
 
