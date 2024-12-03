@@ -1,5 +1,9 @@
 package base;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,6 +26,10 @@ public class Simulation {
     private int numOfSimulation;
     private List<Scenario> scenarios = new ArrayList<Scenario>();
 
+    private final String outputFilePath = "./out/simulation.txt";
+    private File outputFile;
+    private BufferedWriter writer;
+
     private Simulation(final String fileName) throws Exception {
         source = new FileSource(fileName);
         headerParser = new PositiveNumberParser();
@@ -35,7 +43,7 @@ public class Simulation {
         return instance;
     }
 
-    public void initSimulation() throws ParsingException {
+    public void initSimulation() throws ParsingException, IOException {
         if (headerParser == null || contentParser == null) {
             throw new ParsingException("Parser for simulation not initialized!");
         }
@@ -44,6 +52,10 @@ public class Simulation {
         while (source.nextLine()) {
             scenarios.add(contentParser.parse(source.getCurrentLine()));
         }
+
+        // initialize here because if the scenario file cannot pass the parser,
+        // no point of creating a output file and writer anyway
+        prepareWriter();
     }
 
     public int getNumOfSimulation() {
@@ -52,6 +64,32 @@ public class Simulation {
 
     public List<Scenario> getScenarios() {
         return scenarios;
+    }
+
+    private void prepareWriter() throws IOException {
+        // create file
+        outputFile = new File(outputFilePath);
+        if (outputFile.exists()) {
+            outputFile.delete();
+        }
+        outputFile.createNewFile();
+
+        writer = new BufferedWriter(new FileWriter(outputFile));
+    }
+
+    public BufferedWriter getWriter() throws ParsingException {
+        // sanity check
+        if (writer == null) {
+            throw new ParsingException("Writer not initialized!");
+        }
+        return writer;
+    }
+
+    public void cleanup() throws IOException {
+        writer.close();
+        LoggerUtils.info(String.format(
+                "Generated simulation log: %s. Run `make log` to view the simulation log.",
+                outputFilePath));
     }
 
     public void show() {
