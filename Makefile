@@ -3,12 +3,14 @@
 #------------------------------------------------------------------------------#
 
 # Sources
-SRC_MAIN		:= src/main
-SRC_TEST		:= src/test
+SRC_DIR			:= src
+SRC_MAIN		:= $(SRC_DIR)/main
+SRC_TEST		:= $(SRC_DIR)/test
 
-# Output files (.class files)
+# Output files (.class files) & simulation log
 OUT_DIR			:= out
-OUT_TEST_DIR	:= out/test
+OUT_TEST_DIR	:= $(OUT_DIR)/test
+OUT_FILE		:= $(OUT_DIR)/simulation.txt
 
 # Main
 MAIN_CLASS		:= AvajLauncher
@@ -33,6 +35,9 @@ compile-tests: compile
 
 run: print-main-art compile
 	@java -cp $(OUT_DIR) $(MAIN_CLASS) $(SCENARIO)
+
+log:
+	@cat -e $(OUT_FILE)
 
 tests: print-test-art compile-tests
 	@java -cp $(OUT_DIR):$(OUT_TEST_DIR) $(TEST_MAIN_CLASS)

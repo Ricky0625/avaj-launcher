@@ -69,6 +69,8 @@ public class Simulation {
     private void prepareWriter() throws IOException {
         // create file
         outputFile = new File(outputFilePath);
+        // this is a sanity check lol. log file will be generated in out/ which will be
+        // deleted everytime the application runs
         if (outputFile.exists()) {
             outputFile.delete();
         }
@@ -87,9 +89,8 @@ public class Simulation {
 
     public void cleanup() throws IOException {
         writer.close();
-        LoggerUtils.info(String.format(
-                "Generated simulation log: %s. Run `make log` to view the simulation log.",
-                outputFilePath));
+        LoggerUtils.info(String.format("Generated simulation log: %s.", outputFilePath));
+        LoggerUtils.log(LoggerUtils.YELLOW, "INST", "Run `make log` to view the simulation log.");
     }
 
     public void show() {
