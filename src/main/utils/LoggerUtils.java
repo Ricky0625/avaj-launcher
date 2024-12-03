@@ -1,5 +1,8 @@
 package utils;
 
+import java.io.BufferedWriter;
+import java.io.IOException;
+
 public final class LoggerUtils {
 
 	public static final String RESET = "\u001B[0m";
@@ -59,6 +62,12 @@ public final class LoggerUtils {
 			System.out.printf("[%s]	", tag);
 		}
 		System.out.println(message + RESET);
+	}
+
+	public static void logToFile(final BufferedWriter writer, final String message) throws IOException {
+		writer.write(message);
+		writer.newLine();
+		writer.flush();
 	}
 
 	private LoggerUtils() {
