@@ -25,6 +25,6 @@ public class Coordinates {
 
     @Override
     public String toString() {
-        return "lo: " + longitude + " la: " + latitude + " h: " + height;
+        return String.format("[%3d,%3d,%3d]", longitude, latitude, height);
     }
 }
