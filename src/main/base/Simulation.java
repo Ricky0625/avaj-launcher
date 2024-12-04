@@ -1,12 +1,14 @@
 package base;
 
-import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileWriter;
+import java.io.FileDescriptor;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.List;
 
+import aircraft.AircraftFactory;
 import exceptions.ParsingException;
 import parser.Parser;
 import parser.PositiveNumberParser;
@@ -14,33 +16,33 @@ import parser.ScenarioParser;
 import utils.FileSource;
 import utils.LoggerUtils;
 import weather.WeatherProvider;
+import weather.WeatherTower;
 
 public class Simulation {
 
     private static Simulation instance;
 
-    private final FileSource source;
     private Parser<Integer> headerParser;
     private Parser<Scenario> contentParser;
 
     private int numOfSimulation;
     private List<Scenario> scenarios = new ArrayList<Scenario>();
 
+    private final FileSource source;
     private final String outputFilePath = "./out/simulation.txt";
     private File outputFile;
-    private BufferedWriter writer;
-
-    private Simulation(final String fileName) throws Exception {
-        source = new FileSource(fileName);
-        headerParser = new PositiveNumberParser();
-        contentParser = new ScenarioParser();
-    }
 
     public static Simulation getInstance(final String fileName) throws Exception {
         if (instance == null) {
             instance = new Simulation(fileName);
         }
         return instance;
+    }
+
+    private Simulation(final String fileName) throws Exception {
+        source = new FileSource(fileName);
+        headerParser = new PositiveNumberParser();
+        contentParser = new ScenarioParser();
     }
 
     public void initSimulation() throws ParsingException, IOException {
@@ -53,9 +55,19 @@ public class Simulation {
             scenarios.add(contentParser.parse(source.getCurrentLine()));
         }
 
-        // initialize here because if the scenario file cannot pass the parser,
-        // no point of creating a output file and writer anyway
-        prepareWriter();
+        // prepare the output file only if the parsing is ok
+        prepareOutputFile();
+    }
+
+    public void run() throws IOException {
+        WeatherTower weatherTower = new WeatherTower();
+
+        registerAircraft(weatherTower);
+        // begin simulation, change weather
+        while (numOfSimulation-- > 0) {
+            LoggerUtils.log("Iteration: " + numOfSimulation);
+            weatherTower.changeWeather();
+        }
     }
 
     public int getNumOfSimulation() {
@@ -66,7 +78,27 @@ public class Simulation {
         return scenarios;
     }
 
-    private void prepareWriter() throws IOException {
+    public void cleanup() throws IOException {
+        // simulation ended, system.out call will print to console from now
+        System.setOut(new PrintStream(new FileOutputStream(FileDescriptor.out)));
+        LoggerUtils.info(String.format("Generated simulation log: %s.", outputFilePath));
+        LoggerUtils.log(LoggerUtils.YELLOW, "INST", "Run `make log` to view the simulation log.");
+    }
+
+    private void registerAircraft(final WeatherTower tower) throws IOException {
+        AircraftFactory aircraftFactory = AircraftFactory.getInstance();
+
+        for (Scenario scenario : scenarios) {
+            Flyable aircraft = aircraftFactory.newAircraft(
+                    scenario.getType(),
+                    scenario.getName(),
+                    scenario.getCoordinates());
+            tower.register(aircraft);
+            aircraft.registerTower(tower);
+        }
+    }
+
+    private void prepareOutputFile() throws IOException {
         // create file
         outputFile = new File(outputFilePath);
         // this is a sanity check lol. log file will be generated in out/ which will be
@@ -76,30 +108,8 @@ public class Simulation {
         }
         outputFile.createNewFile();
 
-        writer = new BufferedWriter(new FileWriter(outputFile));
-    }
-
-    public BufferedWriter getWriter() throws ParsingException {
-        // sanity check
-        if (writer == null) {
-            throw new ParsingException("Writer not initialized!");
-        }
-        return writer;
-    }
-
-    public void cleanup() throws IOException {
-        writer.close();
-        LoggerUtils.info(String.format("Generated simulation log: %s.", outputFilePath));
-        LoggerUtils.log(LoggerUtils.YELLOW, "INST", "Run `make log` to view the simulation log.");
-    }
-
-    public void show() {
-        for (Scenario s : scenarios) {
-            LoggerUtils.debug(
-                    "\n[TYPE] " + s.getType() + "\n[NAME] " + s.getName() + "\n[Coord] "
-                            + s.getCoordinates().toString());
-            LoggerUtils.warn("Weather: " + WeatherProvider.getInstance().getCurrentWeather(s.getCoordinates()) + "\n");
-        }
+        // redirect any system.out call to the output file from now on
+        System.setOut(new PrintStream(new FileOutputStream(outputFile)));
     }
 
 }
