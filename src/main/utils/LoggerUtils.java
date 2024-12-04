@@ -23,7 +23,7 @@ public final class LoggerUtils {
 	}
 
 	public static void error(final String message) {
-		System.out.println(RED + "[ERR]	" + message + RESET);
+		System.err.println(RED + "[ERR]	" + message + RESET);
 	}
 
 	public static void debug(final String message) {
@@ -62,6 +62,10 @@ public final class LoggerUtils {
 			System.out.printf("[%s]	", tag);
 		}
 		System.out.println(message + RESET);
+	}
+
+	public static void log(final String message) {
+		System.out.println(message);
 	}
 
 	public static void logToFile(final BufferedWriter writer, final String message) throws IOException {
