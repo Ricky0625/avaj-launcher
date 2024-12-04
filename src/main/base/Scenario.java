@@ -14,8 +14,8 @@ public class Scenario {
         this.coordinates = coordinates;
     }
 
-    public AircraftType getType() {
-        return type;
+    public String getType() {
+        return type.toString();
     }
 
     public String getName() {
