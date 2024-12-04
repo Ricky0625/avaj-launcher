@@ -22,15 +22,13 @@ public class WeatherProvider {
         return weather[index];
     }
 
-    // ah damn how should i test it?
     private int getSeed(final Coordinates p_coordinates) {
-        long timeFactor = System.currentTimeMillis() / 10000; // change every sec
         // bday algo lol
         int seed = 6 * p_coordinates.getLongitude()
                 + 2 * p_coordinates.getLatitude()
                 + 5 * p_coordinates.getHeight();
         // prevent overflow. since coords are positive, seed should not be negative
-        return (seed + (int) timeFactor) % Integer.MAX_VALUE;
+        return seed % Integer.MAX_VALUE;
     }
 
 }
