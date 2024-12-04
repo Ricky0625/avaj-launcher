@@ -3,6 +3,7 @@ package aircraft;
 import base.Aircraft;
 import base.Coordinates;
 import types.AircraftType;
+import utils.LoggerUtils;
 
 public class JetPlane extends Aircraft {
 
@@ -12,6 +13,8 @@ public class JetPlane extends Aircraft {
 
     @Override
     public void updateConditions() {
+        String weather = weatherTower.getWeather(getCoordinates());
+        LoggerUtils.log(getPrefix() + weather);
     }
 
     @Override

@@ -3,6 +3,7 @@ package aircraft;
 import base.Aircraft;
 import base.Coordinates;
 import types.AircraftType;
+import utils.LoggerUtils;
 
 public class Baloon extends Aircraft {
 
@@ -12,11 +13,12 @@ public class Baloon extends Aircraft {
 
     @Override
     public void updateConditions() {
+        String weather = weatherTower.getWeather(getCoordinates());
+        LoggerUtils.log(getPrefix() + weather);
     }
 
     @Override
     public String getAircraftType() {
         return AircraftType.BALOON.toString();
     }
-
 }
