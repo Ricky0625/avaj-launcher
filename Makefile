@@ -37,7 +37,7 @@ run: print-main-art compile
 	@java -cp $(OUT_DIR) $(MAIN_CLASS) $(SCENARIO)
 
 log:
-	@cat -e $(OUT_FILE)
+	@cat $(OUT_FILE)
 
 tests: print-test-art compile-tests
 	@java -cp $(OUT_DIR):$(OUT_TEST_DIR) $(TEST_MAIN_CLASS)
