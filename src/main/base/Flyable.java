@@ -1,16 +1,12 @@
 package base;
 
+import aircraft.AircraftMetadata;
 import weather.WeatherTower;
 
-public abstract class Flyable {
+public interface Flyable extends AircraftMetadata {
+    // by default it's abstract and public
+    void updateConditions();
 
-    protected WeatherTower weatherTower;
-
-    abstract public void updateConditions();
-
-    public void registerTower(WeatherTower p_tower) {
-        weatherTower = p_tower;
-        weatherTower.register(this);
-    }
+    void registerTower(WeatherTower p_tower);
 
 }
