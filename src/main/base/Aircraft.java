@@ -11,7 +11,7 @@ public class Aircraft implements Flyable {
     protected WeatherTower weatherTower;
 
     // "TYPE#NAME(UNIQUE_ID): "
-    protected final String PREFIX_TEMPLATE = "%s#%s(%d): ";
+    protected final String PREFIX_TEMPLATE = "%10s#%s(%d): ";
 
     protected Aircraft(long p_id, String p_name, Coordinates p_coordinates) {
         id = p_id;
