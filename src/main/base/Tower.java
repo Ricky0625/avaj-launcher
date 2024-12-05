@@ -1,6 +1,5 @@
 package base;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,17 +18,23 @@ public class Tower {
     public void register(Flyable p_flyable) {
         observers.add(p_flyable);
         // suppose this should log into the output file
-        LoggerUtils.log("", null, getRegisterMessage(p_flyable));
+        LoggerUtils.log(getRegisterMessage(p_flyable));
     }
 
-    public void unregister(Flyable p_flyable) throws IOException {
+    public void unregister(Flyable p_flyable) {
         observers.remove(p_flyable);
         // suppose this should log into the output file
-        LoggerUtils.log("", null, getUnregisterMessage(p_flyable));
+        LoggerUtils.log(getUnregisterMessage(p_flyable));
     }
 
     protected void contitionChanged() {
-        for (Flyable observer : observers) {
+        // observer will unregister itself in updateConditions
+        // which means it will update while iterating through
+        // this will throw ConcurrentModificationException
+        // need to every time this function is called.
+
+        List<Flyable> copyObservers = new ArrayList<>(observers);
+        for (Flyable observer : copyObservers) {
             observer.updateConditions();
         }
     }
