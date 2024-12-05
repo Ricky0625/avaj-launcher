@@ -5,7 +5,8 @@ public class Coordinates {
     private int latitude;
     private int height;
 
-    public Coordinates(int p_longitude, int p_latitude, int p_height) {
+    // package-private constructor, can only instantiated in coords package
+    Coordinates(int p_longitude, int p_latitude, int p_height) {
         longitude = p_longitude;
         latitude = p_latitude;
         height = p_height;
@@ -21,6 +22,18 @@ public class Coordinates {
 
     public int getHeight() {
         return height;
+    }
+
+    public void setLongitude(int longitude) {
+        this.longitude = longitude;
+    }
+
+    public void setLatitude(int latitude) {
+        this.latitude = latitude;
+    }
+
+    public void setHeight(int height) {
+        this.height = Math.max(0, height);
     }
 
     @Override
