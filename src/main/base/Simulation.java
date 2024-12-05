@@ -64,7 +64,6 @@ public class Simulation {
         registerAircraft(weatherTower);
         // begin simulation, change weather
         while (numOfSimulation-- > 0) {
-            LoggerUtils.log("Iteration: " + numOfSimulation);
             weatherTower.changeWeather();
         }
     }
