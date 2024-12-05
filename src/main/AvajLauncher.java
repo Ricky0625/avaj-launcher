@@ -18,7 +18,7 @@ public class AvajLauncher {
             sim.run();
             sim.cleanup(); // close file & show post simulation instruction
         } catch (Exception e) {
-            LoggerUtils.error(e.getMessage());
+            LoggerUtils.error(e.getClass().getName() + " " + e.getMessage());
         }
     }
 
