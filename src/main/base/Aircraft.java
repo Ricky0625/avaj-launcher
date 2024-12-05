@@ -1,5 +1,6 @@
 package base;
 
+import coords.Coordinates;
 import weather.WeatherTower;
 
 public class Aircraft implements Flyable {

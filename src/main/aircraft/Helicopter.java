@@ -1,7 +1,7 @@
 package aircraft;
 
 import base.Aircraft;
-import base.Coordinates;
+import coords.Coordinates;
 import types.AircraftType;
 import utils.LoggerUtils;
 

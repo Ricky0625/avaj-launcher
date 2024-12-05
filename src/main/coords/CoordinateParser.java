@@ -1,7 +1,8 @@
-package parser;
+package coords;
 
-import base.Coordinates;
 import exceptions.ParsingException;
+import parser.ArrayParser;
+import parser.PositiveNumberParser;
 
 public class CoordinateParser implements ArrayParser<Coordinates> {
 

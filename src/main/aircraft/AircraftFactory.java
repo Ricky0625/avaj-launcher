@@ -1,7 +1,7 @@
 package aircraft;
 
-import base.Coordinates;
 import base.Flyable;
+import coords.Coordinates;
 import types.AircraftType;
 
 public class AircraftFactory {

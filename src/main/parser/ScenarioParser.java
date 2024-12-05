@@ -3,6 +3,7 @@ package parser;
 import java.util.Arrays;
 
 import base.Scenario;
+import coords.CoordinateParser;
 import exceptions.ParsingException;
 
 public class ScenarioParser implements Parser<Scenario> {

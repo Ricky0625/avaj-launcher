@@ -15,7 +15,6 @@ import parser.PositiveNumberParser;
 import parser.ScenarioParser;
 import utils.FileSource;
 import utils.LoggerUtils;
-import weather.WeatherProvider;
 import weather.WeatherTower;
 
 public class Simulation {

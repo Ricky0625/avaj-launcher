@@ -1,6 +1,6 @@
 package weather;
 
-import base.Coordinates;
+import coords.Coordinates;
 import types.WeatherType;
 
 public class WeatherProvider {

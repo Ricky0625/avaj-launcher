@@ -1,5 +1,6 @@
 package base;
 
+import coords.Coordinates;
 import types.AircraftType;
 
 public class Scenario {
