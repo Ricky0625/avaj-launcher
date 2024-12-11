@@ -1,11 +1,14 @@
 package weather;
 
+import java.util.Random;
+
 import coords.Coordinates;
 import types.WeatherType;
 
 public class WeatherProvider {
     public static WeatherProvider instance;
     private final String[] weather = WeatherType.getWeathers();
+    private final Random random = new Random();
 
     private WeatherProvider() {
     }
@@ -18,18 +21,10 @@ public class WeatherProvider {
     }
 
     public String getCurrentWeather(Coordinates p_coordinates) {
-        int index = getSeed(p_coordinates) % weather.length;
+        int bias = p_coordinates.getLongitude() + p_coordinates.getLatitude()
+                + p_coordinates.getHeight() % weather.length;
+        int index = (random.nextInt(weather.length) + bias) % weather.length;
         return weather[index];
-    }
-
-    private int getSeed(final Coordinates p_coordinates) {
-        // bday algo lol
-        int seed = 6 * p_coordinates.getLongitude()
-                + 2 * p_coordinates.getLatitude()
-                + 5 * p_coordinates.getHeight();
-        // prevent overflow. since coords are positive, seed should not be negative so
-        // no need to handle INT_MIN?
-        return seed % Integer.MAX_VALUE;
     }
 
 }
