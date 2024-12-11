@@ -27,7 +27,8 @@ public class WeatherProvider {
         int seed = 6 * p_coordinates.getLongitude()
                 + 2 * p_coordinates.getLatitude()
                 + 5 * p_coordinates.getHeight();
-        // prevent overflow. since coords are positive, seed should not be negative
+        // prevent overflow. since coords are positive, seed should not be negative so
+        // no need to handle INT_MIN?
         return seed % Integer.MAX_VALUE;
     }
 
