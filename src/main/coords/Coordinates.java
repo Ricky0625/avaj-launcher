@@ -38,6 +38,6 @@ public class Coordinates {
 
     @Override
     public String toString() {
-        return String.format("[%3d,%3d,%3d]", longitude, latitude, height);
+        return String.format("[%d,%d,%d]", longitude, latitude, height);
     }
 }
