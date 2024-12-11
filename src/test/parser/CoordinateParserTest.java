@@ -1,12 +1,11 @@
 package parser;
 
 import abstractions.TestRunner;
-import base.Coordinates;
-import base.Scenario;
+import coords.CoordinateParser;
+import coords.Coordinates;
 import exceptions.BaseException;
 import exceptions.ParsingException;
 import exceptions.TestFailureException;
-import utils.LoggerUtils;
 
 public class CoordinateParserTest extends TestRunner {
 
@@ -18,7 +17,6 @@ public class CoordinateParserTest extends TestRunner {
 
 	private String[] createTestCase(final String longitude, final String latitude, final String height) {
 		String[] arr = new String[] { longitude, latitude, height };
-		// System.out.println(arr[0] + "," + arr[1] + "," + arr[2]);
 		return arr;
 	}
 
