@@ -5,9 +5,9 @@ import java.util.Map;
 
 import base.Aircraft;
 import types.WeatherType;
+import utils.LoggerUtils;
 import coords.Coordinates;
 import types.AircraftType;
-import utils.LoggerUtils;
 
 public class Baloon extends Aircraft {
 
@@ -63,4 +63,5 @@ public class Baloon extends Aircraft {
     public String getAircraftType() {
         return AircraftType.BALOON.toString();
     }
+
 }

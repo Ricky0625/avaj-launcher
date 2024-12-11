@@ -63,4 +63,5 @@ public class JetPlane extends Aircraft {
     public String getAircraftType() {
         return AircraftType.JETPLANE.toString();
     }
+
 }

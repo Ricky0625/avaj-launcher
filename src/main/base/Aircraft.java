@@ -1,17 +1,14 @@
 package base;
 
 import coords.Coordinates;
-import weather.WeatherTower;
 
-public class Aircraft implements Flyable {
+public class Aircraft extends Flyable {
     protected long id;
     protected String name;
     protected Coordinates coordinates;
 
-    protected WeatherTower weatherTower;
-
     // "TYPE#NAME(UNIQUE_ID): "
-    protected final String PREFIX_TEMPLATE = "%10s#%s(%d): ";
+    protected final String PREFIX_TEMPLATE = "%s#%s(%d): ";
 
     protected Aircraft(long p_id, String p_name, Coordinates p_coordinates) {
         id = p_id;
@@ -40,12 +37,7 @@ public class Aircraft implements Flyable {
 
     @Override
     public void updateConditions() {
-        throw new UnsupportedOperationException("Unimplemented method 'updateConditions'");
-    }
-
-    @Override
-    public void registerTower(WeatherTower p_tower) {
-        weatherTower = p_tower;
+        // do nothing
     }
 
 }
