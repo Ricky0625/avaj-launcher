@@ -13,7 +13,7 @@ public class WeatherTower extends Tower {
     }
 
     public void changeWeather() {
-        contitionChanged(); // from Tower class
+        super.contitionChanged();
     }
 
 }
