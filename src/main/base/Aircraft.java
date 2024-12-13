@@ -1,11 +1,14 @@
 package base;
 
 import coords.Coordinates;
+import weather.WeatherTower;
 
-public class Aircraft extends Flyable {
+public class Aircraft implements Flyable {
     protected long id;
     protected String name;
     protected Coordinates coordinates;
+
+    protected WeatherTower weatherTower;
 
     // "TYPE#NAME(UNIQUE_ID): "
     protected final String PREFIX_TEMPLATE = "%s#%s(%d): ";
@@ -38,6 +41,11 @@ public class Aircraft extends Flyable {
     @Override
     public void updateConditions() {
         // do nothing
+    }
+
+    @Override
+    public void registerTower(WeatherTower p_tower) {
+        weatherTower = p_tower;
     }
 
 }
