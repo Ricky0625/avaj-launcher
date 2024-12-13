@@ -51,12 +51,12 @@ public class JetPlane extends Aircraft {
                 break;
         }
 
+        LoggerUtils.log(super.getPrefix() + weatherMsg.get(weather));
+
         if (coordinates.getHeight() <= 0) {
             weatherTower.unregister(this);
             return;
         }
-
-        LoggerUtils.log(super.getPrefix() + weatherMsg.get(weather));
     }
 
     @Override
