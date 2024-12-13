@@ -21,8 +21,8 @@ public class WeatherProvider {
     }
 
     public String getCurrentWeather(Coordinates p_coordinates) {
-        int bias = p_coordinates.getLongitude() + p_coordinates.getLatitude()
-                + p_coordinates.getHeight() % weather.length;
+        int bias = (p_coordinates.getLongitude() + p_coordinates.getLatitude()
+                + p_coordinates.getHeight()) % weather.length;
         int index = (random.nextInt(weather.length) + bias) % weather.length;
         return weather[index];
     }
