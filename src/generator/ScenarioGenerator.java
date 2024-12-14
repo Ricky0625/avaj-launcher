@@ -64,6 +64,7 @@ public class ScenarioGenerator {
 
 			if (parsedArgs.containsKey("-h") && parsedArgs.size() == 1) {
 				showHelpMenu();
+				return;
 			}
 
 			// need to be aware that the output is actually redirect to the file from now on
